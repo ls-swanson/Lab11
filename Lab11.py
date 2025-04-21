@@ -14,13 +14,17 @@ def load_students(filepath):
 def load_assignments(filepath):
     assignments = {}
     with open(filepath, 'r') as f:
-        for line in f:
-            name, points, assignment_id = line.strip().rsplit(" ", 2)
+        lines = [line.strip() for line in f if line.strip()] 
+        for i in range(0, len(lines), 3):
+            name = lines[i]
+            assignment_id = lines[i+1]
+            points = int(lines[i+2])
             assignments[assignment_id] = {
                 'name': name,
-                'points': int(points)
+                'points': points
             }
     return assignments
+
 
 
 def load_submissions(directory):
