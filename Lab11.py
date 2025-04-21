@@ -6,8 +6,10 @@ def load_students(filepath):
     students = {}
     with open(filepath, 'r') as f:
         for line in f:
-            name, student_id = line.strip().rsplit(" ", 1)
-            students[student_id] = name
+            line = line.strip()
+            student_id = line[:3]
+            name = line[3:]
+            students[name] = student_id
     return students
 
 
@@ -46,12 +48,8 @@ def load_submissions(directory):
 
 
 def get_student_grade(name, students, assignments, submissions):
-    student_id = None
-    for sid, sname in students.items():
-        if sname.lower() == name.lower():
-            student_id = sid
-            break
-
+    student_id = students.get(name)
+    
     if not student_id:
         print("Student not found")
         return
@@ -64,6 +62,7 @@ def get_student_grade(name, students, assignments, submissions):
 
     grade = round((total_score / 1000) * 100)
     print(f"{grade}%")
+
 
 
 def assignment_statistics(name, assignments, submissions):
