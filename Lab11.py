@@ -123,7 +123,7 @@ def assignment_graph(name, assignments, submissions):
 def main():
     students = load_students("data/students.txt")
     assignments = load_assignments("data/assignments.txt")
-    submissions = load_submissions("data/submissions")  # ✅ Fixed path
+    submissions = load_submissions("data/submissions")  
 
     print("1. Student grade")
     print("2. Assignment statistics")
