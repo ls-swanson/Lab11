@@ -31,15 +31,17 @@ def load_submissions(directory):
     submissions = []
     for filename in os.listdir(directory):
         filepath = os.path.join(directory, filename)
-        if os.path.isfile(filepath):  # Just to make sure we're not processing subdirectories
+        if os.path.isfile(filepath):
             with open(filepath, 'r') as f:
                 for line in f:
-                    student_id, assignment_id, percent = line.strip().split()
-                    submissions.append({
-                        'student_id': student_id,
-                        'assignment_id': assignment_id,
-                        'percent': float(percent)
-                    })
+                    parts = line.strip().split('|')
+                    if len(parts) == 3:
+                        student_id, assignment_id, percent = parts
+                        submissions.append({
+                            'student_id': student_id,
+                            'assignment_id': assignment_id,
+                            'percent': float(percent)
+                        })
     return submissions
 
 
