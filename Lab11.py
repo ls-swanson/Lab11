@@ -30,8 +30,9 @@ def load_assignments(filepath):
 def load_submissions(directory):
     submissions = []
     for filename in os.listdir(directory):
-        if filename.startswith('submission'):
-            with open(os.path.join(directory, filename), 'r') as f:
+        filepath = os.path.join(directory, filename)
+        if os.path.isfile(filepath):  # Just to make sure we're not processing subdirectories
+            with open(filepath, 'r') as f:
                 for line in f:
                     student_id, assignment_id, percent = line.strip().split()
                     submissions.append({
