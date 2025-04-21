@@ -16,6 +16,7 @@ def load_assignments(filepath):
     with open(filepath, 'r') as f:
         for line in f:
             name, points = line.strip().rsplit(" ", 2)
+            assignment_id = None
             assignments[assignment_id] = {
                 'name': name,
                 'points': int(points)
